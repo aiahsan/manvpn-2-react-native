@@ -6,30 +6,50 @@ import Icon from '../../styles/icons';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 const WIDTH = Dimensions.get('screen').width;
-
-export default ({ isConnected, setisConnected }) => {
+const haldWidth = WIDTH / 2;
+const emptySpace = WIDTH - haldWidth;
+export default ({ isConnected, setisConnected, theme }) => {
+  React.useState(() => {}, []);
   return (
-    <View style={Style.flexCenter}>
+    <View style={[Style.flexCenter, { zIndex: 3, top: RFPercentage(5) }]}>
       <View style={{ position: 'relative', top: RFPercentage(-1.5) }}>
         <LinearGradient
-          colors={['#00F2FE', '#4FACFE']}
+          colors={[
+            theme == 1 ? '#00F2FE' : '#1C60CD',
+            theme == 1 ? '#4FACFE' : '#4FACFE',
+          ]}
           start={{ x: 0.0, y: 1.0 }}
           end={{ x: 1.0, y: 1.0 }}
-          style={Style.centerG}
+          style={[Style.centerG, Style.shadowApp, { shadowColor: '#1C60CD' }]}
         >
           <TouchableOpacity
             onPress={() => setisConnected(!isConnected)}
-            style={Style.buttonCenterHome}
+            style={[
+              Style.buttonCenterHome,
+              { backgroundColor: theme == 1 ? '#083358' : 'white' },
+            ]}
           >
             {isConnected == true ? (
               <>
-                <Icon name='log' />
+                <Icon theme={theme} name='log' />
                 <MaskedView
                   style={Style.maskedView}
-                  maskElement={<Text style={Style.connnectText}>Stop</Text>}
+                  maskElement={
+                    <Text
+                      style={[
+                        Style.connnectText,
+                        { textTransform: 'uppercase' },
+                      ]}
+                    >
+                      Stop
+                    </Text>
+                  }
                 >
                   <LinearGradient
-                    colors={['#00F2FE', '#4FACFE']}
+                    colors={[
+                      theme == 1 ? '#00F2FE' : '#1C60CD',
+                      theme == 1 ? '#4FACFE' : '#1C60CD',
+                    ]}
                     start={{ x: 0.0, y: 1.0 }}
                     end={{ x: 1.0, y: 1.0 }}
                     style={{ flex: 1 }}
@@ -39,10 +59,19 @@ export default ({ isConnected, setisConnected }) => {
             ) : (
               <MaskedView
                 style={Style.maskedView}
-                maskElement={<Text style={Style.connnectText}>Connect</Text>}
+                maskElement={
+                  <Text
+                    style={[Style.connnectText, { textTransform: 'uppercase' }]}
+                  >
+                    Connect
+                  </Text>
+                }
               >
                 <LinearGradient
-                  colors={['#00F2FE', '#4FACFE']}
+                  colors={[
+                    theme == 1 ? '#00F2FE' : '#1C60CD',
+                    theme == 1 ? '#4FACFE' : '#1C60CD',
+                  ]}
                   start={{ x: 0.0, y: 1.0 }}
                   end={{ x: 1.0, y: 1.0 }}
                   style={Style.flex}

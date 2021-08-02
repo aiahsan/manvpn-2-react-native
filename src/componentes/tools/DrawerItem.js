@@ -4,14 +4,21 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Icon from '../../styles/icons';
 import { Style } from '../../styles/appStyle';
-export default ({ icon, title, navigation, page }) => {
+export default ({ icon, title, navigation, page, theme }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(page)}
       style={Style.drawerItem}
     >
-      <Icon name={icon} />
-      <Text style={Style.drawerItemText}>{title}</Text>
+      <Icon theme={theme} name={icon} />
+      <Text
+        style={[
+          Style.drawerItemText,
+          { color: theme == 1 ? 'white' : '#083459' },
+        ]}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

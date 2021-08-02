@@ -7,6 +7,7 @@ import {
   View,
   Dimensions,
 } from 'react-native';
+import { useRef } from 'react';
 import CenterButton from '../componentes/tools/centerButton';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import Icon from '../styles/icons';
@@ -16,29 +17,47 @@ import { Style } from '../styles/appStyle';
 import ConnectButton from '../componentes/tools/connectButton';
 import BottomView from '../componentes/tools/bottomView';
 const WIDTH = Dimensions.get('screen').width;
+import { useSelector } from 'react-redux';
+
 const App = () => {
   const [isConnected, setisConnected] = React.useState(false);
+  const theme = useSelector((x) => x);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: theme == 1 ? '#1d243e' : '#E5E5E5' },
+      ]}
+    >
       <ImageBackground
         source={require('../images/world-map-png.png')}
         style={Style.dflex}
         imageStyle={Style.imageBack}
       >
-        <View style={Style.homecontainer}>
-          <Topbar isHome={true} />
-          <View style={Style.homeTop}>
-            <CenterButton name='Indonesia' ip='139.162.27.99' />
+        <View style={Style.flex}>
+          <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+            <Topbar theme={theme} isHome={true} />
           </View>
-
-          <ConnectButton
-            isConnected={isConnected}
-            setisConnected={setisConnected}
-          />
+          <View
+            style={{
+              flex: 0.6,
+              justifyContent: 'center',
+              alignItems: 'center',
+              top: 45,
+              position: 'relative',
+            }}
+          >
+            <CenterButton theme={theme} name='Indonesia' ip='139.162.27.99' />
+          </View>
+          <View style={{ flex: 1 }}>
+            <BottomView
+              theme={theme}
+              isConnected={isConnected}
+              setisConnected={setisConnected}
+            />
+          </View>
         </View>
-
-        <BottomView isConnected={isConnected} setisConnected={setisConnected} />
       </ImageBackground>
     </View>
   );

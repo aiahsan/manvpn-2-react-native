@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import Topbar from '../componentes/tools/topbar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -14,10 +15,13 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Icon from '../styles/icons';
 import { Switch } from 'react-native-paper';
 import { RadioButton } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 
+const Width = Dimensions.get('screen').width;
 export default () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  const theme = useSelector((x) => x);
 
   return (
     <LinearGradient
@@ -26,21 +30,32 @@ export default () => {
         paddingLeft: 20,
         paddingRight: 20,
       }}
-      colors={['#083459', '#1D243E']}
+      colors={[
+        theme == 1 ? '#083459' : '#E5E5E5',
+        theme == 1 ? '#1D243E' : '#E5E5E5',
+      ]}
       start={{ x: 1, y: 1.0 }}
       end={{ x: 1.0, y: 1.0 }}
     >
-      <Topbar isHome={false} title='Support' />
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Icon name='support' />
+      <Topbar theme={theme} isHome={false} title='Support' />
+      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Icon theme={theme} name='support' />
+        </View>
+        <View
+          style={{
+            flex: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <Text
             style={{
               fontFamily: 'GilroySemiBold',
               fontSize: RFValue(22),
               lineHeight: RFValue(27),
-              marginTop: RFValue(57),
-              color: 'white',
+              marginTop: RFValue(0),
+              color: theme == 1 ? 'white' : '#083459',
               marginBottom: RFValue(20),
             }}
           >
@@ -51,8 +66,7 @@ export default () => {
               fontFamily: 'GilroyRegular',
               fontSize: RFValue(16),
               textAlign: 'center',
-              maxWidth: RFValue(330),
-              color: 'white',
+              color: theme == 1 ? 'white' : '#083459',
               lineHeight: 20,
             }}
           >
@@ -62,11 +76,9 @@ export default () => {
 
           <View
             style={{
-              justifyContent: 'space-between',
               width: '100%',
-              maxWidth: 270,
               flexDirection: 'row',
-              marginTop: RFValue(66),
+              marginTop: RFValue(10),
             }}
           >
             <TouchableOpacity
@@ -74,9 +86,9 @@ export default () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 10,
-                width: RFValue(122),
                 backgroundColor: '#FFFFFF',
-                height: RFValue(127),
+                width: RFValue(122),
+                marginRight: 20,
               }}
             >
               <Image
@@ -123,8 +135,7 @@ export default () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ marginTop: RFValue(100) }}></View>
-      </ScrollView>
+      </View>
     </LinearGradient>
   );
 };

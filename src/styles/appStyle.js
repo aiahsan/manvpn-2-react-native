@@ -34,7 +34,7 @@ export const Style = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'white',
     height: RFValue(55.12),
-    position: 'relative',
+    position: 'absolute',
     left: -1,
     top: -1,
     justifyContent: 'center',
@@ -424,8 +424,6 @@ export const Style = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     zIndex: 1,
-    left: RFValue(7),
-    top: RFValue(10),
   },
   btminner: { position: 'absolute', zIndex: -1 },
   btminnerflex: {
@@ -434,12 +432,13 @@ export const Style = StyleSheet.create({
     paddingTop: RFValue(70),
   },
   btminner1: {
-    position: 'relative',
-    zIndex: 1,
+    position: 'absolute',
+    zIndex: 20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: RFPercentage(10),
+    alignSelf: 'center',
+    marginTop: RFPercentage(20),
   },
   btmstatustext: {
     fontFamily: 'GilroySemiBold',
@@ -481,5 +480,16 @@ export const Style = StyleSheet.create({
     fontSize: RFValue(14),
     lineHeight: RFValue(16),
     color: 'white',
+  },
+  shadowApp: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+
+    elevation: 14,
   },
 });
